@@ -4,10 +4,10 @@ import sjcl from 'sjcl';
 const server = express();
 
 const payload = {
-    name: 'Sarah',
+    name: 'Sarah Vianna',
     birthdate: '29/12/1998', 
-    email: 'aslap@gmail.com',
-    cpf: '12345678945',
+    email: 'sarah@gmail.com',
+    cpf: '39335730092',
     phone: '81993525652',
     cnpj: '04846188000144'
 }
@@ -17,7 +17,7 @@ const encrypted = sjcl.encrypt(secretKey, JSON.stringify(payload));
 
 server.get('/', async (request: Request, response: Response) => {
     response.cookie('hash', encrypted);
-    return response.redirect('http://localhost:3000/wiipo')
+    return response.redirect('https://app-olga-2.vercel.app/wiipo')
 });
 
 server.listen(3007);
