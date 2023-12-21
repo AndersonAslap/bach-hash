@@ -16,8 +16,15 @@ const secretKey = 'your-secret-key';
 const encrypted = sjcl.encrypt(secretKey, JSON.stringify(payload));    
 
 server.get('/', async (request: Request, response: Response) => {
-    response.cookie('hash', encrypted);
-    return response.redirect('https://app-olga-2.vercel.app/wiipo')
+    //response.cookie('hash', encrypted);
+    /*response.cookie('hash', encrypted, {
+        domain: 'app-olga-2.vercel.app',
+        path: '/wiipo',
+        secure: true, 
+        sameSite: 'none',
+      });*/
+    response.setHeader('X-Hash', JSON.stringify(encrypted));
+    return response.redirect(302, 'https://app-olga-2.vercel.app/wiipo')
 });
 
 server.listen(3007);
